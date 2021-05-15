@@ -88,6 +88,22 @@ const Footer = styled.div`
     font-size: 1.3em;
   }
 `;
+
+const CheckBox = styled.div`
+  margin: 10px;
+  display: flex;
+  flex-direction: row;
+  & label {
+    font-family: "Montserrat", sans-serif;
+  }
+`;
+
+const CheckBoxContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+
 function App() {
   let [sintomasValores, setSintomasValores] = useState(
     new Array(sintomas.length).fill(0)
@@ -97,6 +113,9 @@ function App() {
   );
   let [sintomasElegidos, setSintomasElegidos] = useState(false);
   let [enfermedadesElegidas, setEnfermedadesElegidas] = useState(
+    new Array(enfermedades.length).fill(true)
+  );
+  let [enfermedadesElegidasAMandar, setEnfermedadesElegidasAMostrar] = useState(
     new Array(enfermedades.length).fill(true)
   );
 
@@ -109,6 +128,7 @@ function App() {
   let handleElegirSintomas = () => {
     setSintomasValoresElegidos(sintomasValores);
     setSintomasElegidos(true);
+    setEnfermedadesElegidasAMostrar(enfermedadesElegidas);
   };
 
   let handleChangeEnfermedadElegida = (indice, valor) => {
@@ -137,18 +157,20 @@ function App() {
             de mayor certeza.
           </p>
           <h2>Elige las enfermedades a considerar</h2>
-          {enfermedades.map((enfermedad, i) => (
-            <div key={i}>
-              <label>{enfermedad.nombre}</label>
-              <input
-                type="checkbox"
-                checked={enfermedadesElegidas[i]}
-                onChange={(e) =>
-                  handleChangeEnfermedadElegida(i, !enfermedadesElegidas[i])
-                }
-              />
-            </div>
-          ))}
+          <CheckBoxContainer>
+            {enfermedades.map((enfermedad, i) => (
+              <CheckBox key={i}>
+                <label>{enfermedad.nombre}</label>
+                <input
+                  type="checkbox"
+                  checked={enfermedadesElegidas[i]}
+                  onChange={(e) =>
+                    handleChangeEnfermedadElegida(i, !enfermedadesElegidas[i])
+                  }
+                />
+              </CheckBox>
+            ))}
+          </CheckBoxContainer>
         </WelcomeCard>
         <SintomasCard>
           {sintomas.map((sintoma, i) => (
@@ -165,7 +187,7 @@ function App() {
         {sintomasElegidos && (
           <Resultados
             sintomasValores={sintomasValoresElegidos}
-            enfermedadesElegidas={enfermedadesElegidas}
+            enfermedadesElegidas={enfermedadesElegidasAMandar}
           />
         )}
       </BodyWrapper>

@@ -12,9 +12,17 @@ const EnfermedadCard = styled.div`
 const Header = styled.div`
   display: flex;
   justify-content: center;
+  position: relative;
   & h1 {
     font-family: "Montserrat", sans-serif;
     color: #36b6e3;
+  }
+  & p {
+    font-family: "Montserrat", sans-serif;
+    color: #36b6c3;
+    position: absolute;
+    right: 10px;
+    top: -10px;
   }
   border-bottom: 2px solid #36b6e3;
 `;
@@ -64,7 +72,7 @@ const Enfermedad = ({ enfermedad, ajuste }) => {
     <EnfermedadCard>
       <Header>
         <h1>{enfermedad.nombre}</h1>
-        <h2>{ajuste}</h2>
+        <p>Coincidencia del {(ajuste * 100).toFixed(2)}%</p>
       </Header>
       <Body>
         <Imagen src={enfermedad.imagen} />

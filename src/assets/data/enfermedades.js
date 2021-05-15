@@ -1,7 +1,7 @@
 const enfermedades = [
   {
     nombre: "VIH",
-    sintomas: [0.4, 0.5, 0.3, 0, 0],
+    sintomas: [0.5, 0.5, 0.25, 0, 0],
     imagen:
       "https://www.news-medical.net/image.axd?picture=2020%2F7%2Fshutterstock_559306498.jpg",
     origen: "De los monos",
