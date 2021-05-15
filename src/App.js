@@ -5,6 +5,7 @@ import Resultados from "./components/Resultados";
 import sintomas from "./assets/data/sintomas";
 import "./assets/styles/reset.css";
 import "./assets/styles/fonts.css";
+import enfermedades from "./assets/data/enfermedades";
 
 const Header = styled.div`
   background-color: #03c2fc;
@@ -95,6 +96,9 @@ function App() {
     new Array(sintomas.length).fill(0)
   );
   let [sintomasElegidos, setSintomasElegidos] = useState(false);
+  let [enfermedadesElegidas, setEnfermedadesElegidas] = useState(
+    new Array(enfermedades.length).fill(true)
+  );
 
   let actualizarSintomas = (indice, valor) => {
     let sintomasCopy = [...sintomasValores];
@@ -105,6 +109,13 @@ function App() {
   let handleElegirSintomas = () => {
     setSintomasValoresElegidos(sintomasValores);
     setSintomasElegidos(true);
+  };
+
+  let handleChangeEnfermedadElegida = (indice, valor) => {
+    let enfermedadesElegidasCopy = [...enfermedadesElegidas];
+    enfermedadesElegidasCopy[indice] = valor;
+    setEnfermedadesElegidas(enfermedadesElegidasCopy);
+    console.log(enfermedadesElegidas);
   };
 
   return (
@@ -125,6 +136,19 @@ function App() {
             Si presentas malestar, acude a tu médico para obtener un diagnóstico
             de mayor certeza.
           </p>
+          <h2>Elige las enfermedades a considerar</h2>
+          {enfermedades.map((enfermedad, i) => (
+            <div key={i}>
+              <label>{enfermedad.nombre}</label>
+              <input
+                type="checkbox"
+                checked={enfermedadesElegidas[i]}
+                onChange={(e) =>
+                  handleChangeEnfermedadElegida(i, !enfermedadesElegidas[i])
+                }
+              />
+            </div>
+          ))}
         </WelcomeCard>
         <SintomasCard>
           {sintomas.map((sintoma, i) => (
@@ -139,7 +163,10 @@ function App() {
 
         <Button onClick={handleElegirSintomas}>Calcular</Button>
         {sintomasElegidos && (
-          <Resultados sintomasValores={sintomasValoresElegidos} />
+          <Resultados
+            sintomasValores={sintomasValoresElegidos}
+            enfermedadesElegidas={enfermedadesElegidas}
+          />
         )}
       </BodyWrapper>
       <Footer>

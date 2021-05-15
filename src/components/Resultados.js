@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import enfermedades from "../assets/data/enfermedades";
 import Enfermedad from "./Enfermedad";
 import styled from "styled-components";
@@ -27,17 +27,34 @@ const Resultados = (props) => {
     return arr.reduce((a, b) => a + b, 0);
   };
 
+  const calcularAjuste = (enfermedad) => {
+    let ajuste = 1;
+    let union = sumaElementos(calcularUnion(enfermedad));
+    if (union > 0) {
+      ajuste = sumaElementos(calcularInterseccion(enfermedad)) / union;
+    }
+    return ajuste;
+  };
+
   const obtenerEnfermedadesProbables = () => {
     let maxValorDeInterseccion = 0;
     let enfermedadesProbables = [];
-    enfermedades.forEach((enfermedad) => {
-      let suma = sumaElementos(calcularInterseccion(enfermedad));
-      if (suma > maxValorDeInterseccion) {
-        enfermedadesProbables = [];
-        enfermedadesProbables.push(enfermedad);
-        maxValorDeInterseccion = suma;
-      } else if (suma === maxValorDeInterseccion) {
-        enfermedadesProbables.push(enfermedad);
+    enfermedades.forEach((enfermedad, i) => {
+      if (props.enfermedadesElegidas[i]) {
+        let suma = sumaElementos(calcularInterseccion(enfermedad));
+        if (suma > maxValorDeInterseccion) {
+          enfermedadesProbables = [];
+          enfermedad.ajuste = calcularAjuste(enfermedad);
+          if (enfermedad.ajuste > 0.2) {
+            enfermedadesProbables.push(enfermedad);
+            maxValorDeInterseccion = suma;
+          }
+        } else if (suma === maxValorDeInterseccion) {
+          enfermedad.ajuste = calcularAjuste(enfermedad);
+          if (enfermedad.ajuste > 0.2) {
+            enfermedadesProbables.push(enfermedad);
+          }
+        }
       }
     });
     return enfermedadesProbables;
@@ -46,7 +63,9 @@ const Resultados = (props) => {
   return (
     <ResultadosWrapper>
       {obtenerEnfermedadesProbables().map((enfermedad) => {
-        return <Enfermedad enfermedad={enfermedad} />;
+        return (
+          <Enfermedad enfermedad={enfermedad} ajuste={enfermedad.ajuste} />
+        );
       })}
     </ResultadosWrapper>
   );

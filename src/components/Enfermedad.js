@@ -59,11 +59,12 @@ const Footer = styled.div`
   }
 `;
 
-const Enfermedad = ({ enfermedad }) => {
+const Enfermedad = ({ enfermedad, ajuste }) => {
   return (
     <EnfermedadCard>
       <Header>
         <h1>{enfermedad.nombre}</h1>
+        <h2>{ajuste}</h2>
       </Header>
       <Body>
         <Imagen src={enfermedad.imagen} />
