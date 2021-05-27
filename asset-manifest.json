@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/MaurizioTonelli/ETSDiagnosticador/static/css/main.fa594849.chunk.css",
+    "main.js": "/MaurizioTonelli/ETSDiagnosticador/static/js/main.e36349e7.chunk.js",
+    "main.js.map": "/MaurizioTonelli/ETSDiagnosticador/static/js/main.e36349e7.chunk.js.map",
+    "runtime-main.js": "/MaurizioTonelli/ETSDiagnosticador/static/js/runtime-main.f79a6d66.js",
+    "runtime-main.js.map": "/MaurizioTonelli/ETSDiagnosticador/static/js/runtime-main.f79a6d66.js.map",
+    "static/js/2.55079851.chunk.js": "/MaurizioTonelli/ETSDiagnosticador/static/js/2.55079851.chunk.js",
+    "static/js/2.55079851.chunk.js.map": "/MaurizioTonelli/ETSDiagnosticador/static/js/2.55079851.chunk.js.map",
+    "index.html": "/MaurizioTonelli/ETSDiagnosticador/index.html",
+    "static/css/main.fa594849.chunk.css.map": "/MaurizioTonelli/ETSDiagnosticador/static/css/main.fa594849.chunk.css.map",
+    "static/js/2.55079851.chunk.js.LICENSE.txt": "/MaurizioTonelli/ETSDiagnosticador/static/js/2.55079851.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f79a6d66.js",
+    "static/js/2.55079851.chunk.js",
+    "static/css/main.fa594849.chunk.css",
+    "static/js/main.e36349e7.chunk.js"
+  ]
+}
