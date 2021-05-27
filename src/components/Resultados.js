@@ -60,15 +60,19 @@ const Resultados = (props) => {
     return enfermedadesProbables;
   };
 
-  return (
-    <ResultadosWrapper>
-      {obtenerEnfermedadesProbables().map((enfermedad) => {
-        return (
-          <Enfermedad enfermedad={enfermedad} ajuste={enfermedad.ajuste} />
-        );
-      })}
-    </ResultadosWrapper>
-  );
+  if (obtenerEnfermedadesProbables().length) {
+    return (
+      <ResultadosWrapper>
+        {obtenerEnfermedadesProbables().map((enfermedad) => {
+          return (
+            <Enfermedad enfermedad={enfermedad} ajuste={enfermedad.ajuste} />
+          );
+        })}
+      </ResultadosWrapper>
+    );
+  } else {
+    return <div>No hay coincidencias</div>;
+  }
 };
 
 export default Resultados;
